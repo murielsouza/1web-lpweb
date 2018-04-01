@@ -1,20 +1,27 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<h1> EVENTOS, lista and cadastro! </h1>
+  <button (click)="selecionar(true)">Novo </button>
+  <ul *ngFor= "let evento of eventos">
+    <li>
+        Sigla: {{evento.sigla}} --> Nome: {{evento.nome}} [Data Inicio: {{evento.dataInicio}} -- Data Fim: {{evento.dataFim}}]  -- Prazo {{evento.prazo}}
+        <button (click)="excluir(evento)">Excluir</button>
+        <button (click)="editar(evento)" (click)="selecionar(true)">Editar</button>
+    </li>
+  </ul>
+
+  <h1> Cadastrar Evento</h1>
+    <form *ngIf="selecionado == true" #cadastro="ngForm" (submit)="salvar()">
+
+        Sigla: <input type="text" name="sigla" [(ngModel)]="sigla" required class="form-control">
+        Nome: <input type="text" name="nome" [(ngModel)]="nome" required class="form-control">
+        Prazo: <input type="date" name="prazo" [(ngModel)]="prazo" required class="form-control">
+        URL: <input type="text" name="url" [(ngModel)]="url" required class="form-control">
+        Data Início: <input type="date" name="dataInicio" [(ngModel)]="dataInicio" required class="form-control">
+        Data Fim: <input type="date" name="dataFim" [(ngModel)]="dataFim" required class="form-control">
+
+        <button type="submit"[disabled]="!cadastro.valid">Salvar</button>
+        <button type="reset" (click)="cancelar()">Cancelar</button>
+    </form>
+
+
+
 
