@@ -13,11 +13,16 @@ export class AppComponent {
   url = null;
   dataInicio = null;
   dataFim = null;
+  ordem = null;
   editando = null;
   selecionado = null;
+  excluir_ok = false;
+  editar_ok = false;
+  salvar_ok = false;
 
-  eventos = [new Evento("SSP", "Sopão Só Pé", '2018/03/20', 'http://www.ssp.com.br/submissao', null, null),
-             new Evento('MMs',"Melhor Chocolate", '2018/04/01', 'http://www.mms.com.gl', null, null)];
+  eventos = [new Evento("SSP", 'Secretária de Segurança Pública', '2018/03/20', 'http://www.ssp.com.br/submissao', null, null, null),
+              new Evento('MMs','Melhor Chocolate ♥', '2018/04/01', 'http://www.mms.com.gl', null, null, null)];
+
 
   constructor(){
       this.invocar_cache();
@@ -31,11 +36,14 @@ export class AppComponent {
             this.editando.url = this.url;
             this.editando.dataInicio = this.dataInicio;
             this.editando.dataFim = this.dataFim;
+            this.editando.ordem = this.ordem;
             this.armazenar_cache(this.editando);
+            this.editar_ok = true;
         } else {
-            const e = new Evento(this.sigla, this.nome, this.prazo, this.url, this.dataInicio, this.dataFim);
+            const e = new Evento(this.sigla, this.nome, this.prazo, this.url, this.dataInicio, this.dataFim, this.ordem);
             this.eventos.push(e);
             this.armazenar_cache(e);
+            this.salvar_ok = true;
         }
         this.sigla = null;
         this.nome = null;
@@ -43,6 +51,7 @@ export class AppComponent {
         this.prazo = null;
         this.dataInicio = false;
         this.dataFim = null;
+        this.ordem = null;
         this.editando = null;
     }
 
@@ -55,6 +64,7 @@ export class AppComponent {
                 const i = this.eventos.indexOf(evento);
                 this.remover_cache(evento);
                 this.eventos.splice(i, 1);
+                this.excluir_ok = true;
             }
         }
     }
@@ -66,6 +76,7 @@ export class AppComponent {
         this.url = evento.url;
         this.dataInicio = evento.dataInicio;
         this.dataFim = evento.dataFim;
+        this.ordem = evento.ordem;
         this.editando = evento;
     }
 
@@ -76,6 +87,7 @@ export class AppComponent {
         this.url = null;
         this.dataInicio = null;
         this.dataFim = null;
+        this.ordem = null;
         this.editando = null;
     }
 
