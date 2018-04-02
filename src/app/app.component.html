@@ -1,27 +1,39 @@
 <h1> EVENTOS, lista and cadastro! </h1>
-  <button (click)="selecionar(true)">Novo </button>
-  <ul *ngFor= "let evento of eventos">
-    <li>
-        Sigla: {{evento.sigla}} --> Nome: {{evento.nome}} [Data Inicio: {{evento.dataInicio}} -- Data Fim: {{evento.dataFim}}]  -- Prazo {{evento.prazo}}
-        <button (click)="excluir(evento)">Excluir</button>
-        <button (click)="editar(evento)" (click)="selecionar(true)">Editar</button>
-    </li>
-  </ul>
+    <button (click)="selecionar(true)" class="btn btn-sm btn-primary">
+        <i class="fa fa-plus-circle"></i>
+        Novo
+    </button>
 
-  <h1> Cadastrar Evento</h1>
-    <form *ngIf="selecionado == true" #cadastro="ngForm" (submit)="salvar()">
+<div class="container">
+    <ul *ngFor= "let evento of eventos">
+        <li>
+            Sigla: {{evento.sigla}} <br> Nome: {{evento.nome}} <br> Data Inicio: {{evento.dataInicio}} <br> Data Fim: {{evento.dataFim}} <br> Prazo {{evento.prazo}} <br>
+            <button class="btn btn-sm btn-danger" (click)="excluir(evento)">
+                <i class="fa fa-trash"></i> Excluir
+            </button>
+            <button class="btn btn-sm btn-primary" (click)="editar(evento)" (click)="selecionar(true)">
+                <i class="fa fa-pencil-square"></i> Editar
+            </button> <br> <br>
+        </li>
+    </ul>
 
-        Sigla: <input type="text" name="sigla" [(ngModel)]="sigla" required class="form-control">
-        Nome: <input type="text" name="nome" [(ngModel)]="nome" required class="form-control">
-        Prazo: <input type="date" name="prazo" [(ngModel)]="prazo" required class="form-control">
-        URL: <input type="text" name="url" [(ngModel)]="url" required class="form-control">
-        Data Início: <input type="date" name="dataInicio" [(ngModel)]="dataInicio" required class="form-control">
-        Data Fim: <input type="date" name="dataFim" [(ngModel)]="dataFim" required class="form-control">
+    <h1> Cadastrar Evento</h1>
+        <form *ngIf="selecionado == true" #cadastro="ngForm" (submit)="salvar()">
 
-        <button type="submit"[disabled]="!cadastro.valid">Salvar</button>
-        <button type="reset" (click)="cancelar()">Cancelar</button>
-    </form>
+            Sigla: <input type="text" name="sigla" [(ngModel)]="sigla" required class="form-control">
+            Nome: <input type="text" name="nome" [(ngModel)]="nome" required class="form-control">
+            Prazo: <input type="date" name="prazo" [(ngModel)]="prazo" required class="form-control">
+            URL: <input type="text" name="url" [(ngModel)]="url" required class="form-control">
+            Data Início: <input type="date" name="dataInicio" [(ngModel)]="dataInicio" required class="form-control">
+            Data Fim: <input type="date" name="dataFim" [(ngModel)]="dataFim" required class="form-control"> <br>
 
-
+            <button type="submit" class="btn btn-success" [disabled]="!cadastro.valid">
+                <i class="fa fa-save"></i> Salvar
+            </button>
+            <button type="reset" class="btn btn-secondary" (click)="cancelar()">
+                Cancelar
+            </button>
+        </form>
+</div>
 
 
